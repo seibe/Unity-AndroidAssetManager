@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
-using System;
+using System.Threading;
 
 /// <summary>
 /// Test code for <see cref="Android.AssetManager"/>
@@ -31,6 +31,19 @@ public class AndroidAssetManagerTest
         {
             Debug.Log("Start");
 
+            tryReadText();
+            ThreadPool.QueueUserWorkItem(runOnBackgroundThread);
+        }
+
+        private void runOnBackgroundThread(object state)
+        {
+            tryReadText();
+            _isFinish = true;
+        }
+
+        [System.Diagnostics.Conditional("UNITY_ANDROID")]
+        private void tryReadText()
+        {
 #if UNITY_ANDROID
             using (var stream = Android.AssetManager.Open("Hello.txt"))
             {
@@ -46,7 +59,6 @@ public class AndroidAssetManagerTest
                 Debug.LogFormat("Hello.txt = {0} bytes", byteLength);
             }
 #endif
-            _isFinish = true;
         }
     }
 }

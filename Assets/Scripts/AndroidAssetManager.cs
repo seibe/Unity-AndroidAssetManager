@@ -29,6 +29,11 @@ namespace Android
 
         [RuntimeInitializeOnLoadMethod]
         private static void initializeInMainThread() { _isAttachCurrentThread = true; }
+#else
+        private static string _streamingAssetsPath = null;
+
+        [RuntimeInitializeOnLoadMethod]
+        private static void initializeInMainThread() { _streamingAssetsPath = Application.streamingAssetsPath; }
 #endif //UNITY_ANDROID_NATIVE
 
         //----------------------------------------------------------------------
@@ -77,7 +82,7 @@ namespace Android
                 }
             }
 #else
-            var path = string.Format("{0}/{1}", Application.streamingAssetsPath, fileName);
+            var path = string.Format("{0}/{1}", _streamingAssetsPath, fileName);
             if (File.Exists(path))
             {
                 return new AssetInputStream(fileName);
@@ -144,7 +149,7 @@ namespace Android
                     }
                 }
 #else
-                var path = string.Format("{0}/{1}", Application.streamingAssetsPath, FileName);
+                var path = string.Format("{0}/{1}", _streamingAssetsPath, FileName);
                 if (File.Exists(path))
                 {
                     return File.ReadAllBytes(path);
