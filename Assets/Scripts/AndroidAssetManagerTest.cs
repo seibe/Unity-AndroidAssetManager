@@ -58,7 +58,7 @@ public class AndroidAssetManagerTest
 
                 Debug.LogFormat("Hello.txt = {0} bytes", byteLength);
             }
-#endif
+#endif //UNITY_ANDROID
         }
     }
 }

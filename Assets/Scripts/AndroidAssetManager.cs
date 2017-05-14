@@ -184,7 +184,7 @@ namespace Android.Content.Res
                     {
                         _byteLength = ReadAllBytes().Length;
                     }
-#endif
+#endif //UNITY_ANDROID_NATIVE
                     return _byteLength;
                 }
             }
@@ -209,7 +209,7 @@ namespace Android.Content.Res
                     _stream.Dispose();
                     _stream = null;
                 }
-#endif
+#endif //UNITY_ANDROID_NATIVE
             }
         }
     }
