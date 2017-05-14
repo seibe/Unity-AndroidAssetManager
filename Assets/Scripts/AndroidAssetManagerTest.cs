@@ -45,7 +45,7 @@ public class AndroidAssetManagerTest
         private void tryReadText()
         {
 #if UNITY_ANDROID
-            using (var stream = Android.AssetManager.Open("Hello.txt"))
+            using (var stream = Android.Content.Res.AssetManager.Open("Hello.txt"))
             {
                 Assert.NotNull(stream);
 

@@ -11,7 +11,7 @@ using System;
 using System.IO;
 #endif //!UNITY_ANDROID_NATIVE
 
-namespace Android
+namespace Android.Content.Res
 {
     /// <summary>
     /// android.content.res.AssetManager
